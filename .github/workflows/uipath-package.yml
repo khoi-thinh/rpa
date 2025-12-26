@@ -1,0 +1,32 @@
+name: Package UiPath XAML
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download UiPath CLI (Linux)
+        run: |
+          curl -L -o uipcli.tar.gz https://github.com/UiPath/uipathcli/releases/latest/download/uipcli-linux.tar.gz
+          tar -xzf uipcli.tar.gz
+          chmod +x uipcli
+
+      - name: Package UiPath project
+        run: |
+          ./uipcli package pack \
+            --source MyUiPathProject \
+            --output ./output
+
+      - name: Upload nupkg artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: uipath-nupkg
+          path: output/*.nupkg*
