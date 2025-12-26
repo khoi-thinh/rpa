@@ -13,11 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download UiPath CLI (Linux)
+      - name: Download UiPath CLI
         run: |
-          curl -fL -o uipcli https://github.com/UiPath/uipathcli/releases/latest/download/uipcli-linux
-          chmod +x uipcli
-          ./uipcli --version
+          curl -fsL https://github.com/UiPath/uipathcli/releases/latest/download/uipathcli-linux-amd64.tar.gz | tar -xz
+          ./uipathcli --version
 
       - name: Package UiPath project
         run: |
