@@ -15,9 +15,9 @@ jobs:
 
       - name: Download UiPath CLI
         run: |
-          curl -fsL https://github.com/UiPath/uipathcli/releases/latest/download/uipathcli-linux-amd64.tar.gz | tar -xz
-          chmod +x uipathcli/uipath
-          ./uipathcli/uipath --version
+          curl -sL "https://github.com/UiPath/uipathcli/releases/latest/download/uipathcli-linux-amd64.tar.gz"
+          tar -xzf uipathcli-linux-amd64.tar.gz
+          ls -la
 
       - name: Package UiPath project
         run: |
